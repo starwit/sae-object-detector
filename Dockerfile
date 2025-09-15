@@ -38,16 +38,14 @@ RUN mkdir temp_intel && cd temp_intel && \
     wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libigdgmm12_22.8.1_amd64.deb && \
     wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libze-intel-gpu1-dbgsym_25.31.34666.3-0_amd64.ddeb && \
     wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libze-intel-gpu1_25.31.34666.3-0_amd64.deb && \
-    dpkg -i *.deb
+    dpkg -i *.deb && \
+    cd .. && rm -rf temp_intel
 
-# Create a non-root user and group
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+# TODO Normally we would switch to a non-root user here,
+# but we have not gotten the Intel GPU access to work with a non-root user yet
 
-COPY --from=build --chown=appuser:appgroup /code /code
+COPY --from=build /code /code
 WORKDIR /code
-
-# Switch to non-root user
-USER appuser
 
 ENV PATH="/code/.venv/bin:$PATH"
 CMD [ "python", "main.py" ]
