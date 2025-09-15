@@ -21,20 +21,31 @@ COPY . /code/
 
 ### Main artifact / deliverable image
 
-FROM python:3.13-slim
+FROM python:3.13-slim-trixie
 RUN apt update && apt install --no-install-recommends -y \
     libglib2.0-0 \
     libgl1 \
     libturbojpeg0
 
-# Create a non-root user and group
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN mkdir temp_intel && cd temp_intel && \
+    apt update && apt install -y ocl-icd-libopencl1 wget && \
+    wget https://github.com/intel/intel-graphics-compiler/releases/download/v2.16.0/intel-igc-core-2_2.16.0+19683_amd64.deb && \
+    wget https://github.com/intel/intel-graphics-compiler/releases/download/v2.16.0/intel-igc-opencl-2_2.16.0+19683_amd64.deb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/intel-ocloc-dbgsym_25.31.34666.3-0_amd64.ddeb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/intel-ocloc_25.31.34666.3-0_amd64.deb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/intel-opencl-icd-dbgsym_25.31.34666.3-0_amd64.ddeb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/intel-opencl-icd_25.31.34666.3-0_amd64.deb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libigdgmm12_22.8.1_amd64.deb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libze-intel-gpu1-dbgsym_25.31.34666.3-0_amd64.ddeb && \
+    wget https://github.com/intel/compute-runtime/releases/download/25.31.34666.3/libze-intel-gpu1_25.31.34666.3-0_amd64.deb && \
+    dpkg -i *.deb && \
+    cd .. && rm -rf temp_intel
 
-COPY --from=build --chown=appuser:appgroup /code /code
+# TODO Normally we would switch to a non-root user here,
+# but we have not gotten the Intel GPU access to work with a non-root user yet
+
+COPY --from=build /code /code
 WORKDIR /code
-
-# Switch to non-root user
-USER appuser
 
 ENV PATH="/code/.venv/bin:$PATH"
 CMD [ "python", "main.py" ]
