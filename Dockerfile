@@ -21,7 +21,7 @@ COPY . /code/
 
 ### Main artifact / deliverable image
 
-FROM python:3.13-slim-trixie
+FROM python:3.14-slim-trixie
 RUN apt update && apt install --no-install-recommends -y \
     libglib2.0-0 \
     libgl1 \
