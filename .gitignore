@@ -14,3 +14,4 @@ __pycache__
 target
 dist
 env.sh
+requirements.txt
