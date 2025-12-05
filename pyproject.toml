@@ -19,11 +19,13 @@ pydantic-settings = "^2.0.3"
 prometheus-client = "^0.17.1"
 setuptools = "^74.0.0"
 
+# 
 [tool.poetry.group.dev.dependencies]
+pytest = "8.4.1"
+# DO NOT CHANGE THE VERSIONS BELOW, they must match the versions in the docker base image (https://github.com/starwit/build-containers/tree/main/sae-cv-base)
 tensorrt-cu12 = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-libs = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-bindings = {version = "10.13.2.6", source = "nvidia"}
-pytest = "8.4.1"
 openvino = "2025.4.0"
 ultralytics = "8.3.191"
 
