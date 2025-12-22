@@ -11,23 +11,23 @@ poetry-plugin-export = ">=1.8"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-pydantic = "^2.0.0"
+pydantic = "^2.12.5"
 visionapi = { git = "https://github.com/starwit/vision-api.git", subdirectory = "python/visionapi", tag = "3.5.2" }
 visionlib = { git = "https://github.com/starwit/vision-lib.git", subdirectory = "python", tag = "0.14.2" }
-redis = "^5.0.0"
-pydantic-settings = "^2.0.3"
-prometheus-client = "^0.17.1"
-setuptools = "^74.0.0"
+redis = "^7.1.0"
+pydantic-settings = "^2.12.0"
+prometheus-client = "^0.23.1"
+setuptools = "^80.9.0"
 
 # 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.4.1"
+pytest = "9.0.2"
 # DO NOT CHANGE THE VERSIONS BELOW, they must match the versions in the docker base image (https://github.com/starwit/build-containers/tree/main/sae-cv-base)
 tensorrt-cu12 = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-libs = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-bindings = {version = "10.13.2.6", source = "nvidia"}
-openvino = "2025.4.0"
-ultralytics = "8.3.191"
+openvino = "2025.4.1"
+ultralytics = "8.3.240"
 
 [[tool.poetry.source]]
 name = "nvidia"
