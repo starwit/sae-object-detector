@@ -1,6 +1,6 @@
 # You must run `poetry export` before building this
 
-FROM starwitorg/sae-cv-base:0.1.0
+FROM starwitorg/sae-cv-base:0.2.0
 
 RUN apt update && apt install --no-install-recommends -y \
     libglib2.0-0 \

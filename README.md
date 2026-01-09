@@ -27,6 +27,10 @@ The following Github Actions are available:
 With [dependabot.yml](.github/dependabot.yml) a scheduled version update via Dependabot is configured. Dependabot creates a pull request if newer versions are available and the compilation is checked via PR build.
 
 ## Changelog
+### 4.2.1
+- Update `sae-cv-base` to 0.2.0 (relevant for docker build)
+- Update `openvino` to 2025.4.1
+
 ### 4.0.0
 - Explicitly support PyTorch (on CPU, Nvidia and Intel GPU), TensorRT (on Nvidia) and OpenVINO (on Intel) versions of YOLO models
 - Update CUDA libs -> TensorRT recompilation is needed!

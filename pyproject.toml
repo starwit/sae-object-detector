@@ -26,7 +26,7 @@ pytest = "8.4.1"
 tensorrt-cu12 = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-libs = {version = "10.13.2.6", source = "nvidia"}
 tensorrt-cu12-bindings = {version = "10.13.2.6", source = "nvidia"}
-openvino = "2025.4.0"
+openvino = "2025.4.1"
 ultralytics = "8.3.191"
 
 [[tool.poetry.source]]
