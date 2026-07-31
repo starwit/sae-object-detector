@@ -11,7 +11,7 @@ from ultralytics.utils.checks import check_imgsz
 from ultralytics.utils.ops import scale_boxes
 from visionapi.common_pb2 import MessageType
 from visionapi.sae_pb2 import SaeMessage, VideoFrame
-from visionlib.pipeline.tools import get_raw_frame_data
+from visionlib.pipeline import get_raw_frame_data
 
 from .batch import BatchEntry
 from .config import ObjectDetectorConfig

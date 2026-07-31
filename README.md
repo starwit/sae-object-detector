@@ -27,6 +27,10 @@ The following Github Actions are available:
 With [dependabot.yml](.github/dependabot.yml) a scheduled version update via Dependabot is configured. Dependabot creates a pull request if newer versions are available and the compilation is checked via PR build.
 
 ## Changelog
+### 4.3.0
+- Update `visionlib` to 1.x (migration from redis-py to valkey-py)
+- Add optional backpressure, separately configurable for input (`redis.input_backpressure`) and output (`redis.output_backpressure`), both off by default: messages are slowed down instead of dropped when a stage cannot keep up
+
 ### 4.2.1
 - Update `sae-cv-base` to 0.2.0 (relevant for docker build)
 - Update `openvino` to 2025.4.1

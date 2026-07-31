@@ -3,8 +3,7 @@ import signal
 import threading
 
 from prometheus_client import Counter, Histogram, start_http_server
-from visionlib.pipeline.consumer import RedisConsumer
-from visionlib.pipeline.publisher import RedisPublisher
+from visionlib.pipeline import ValkeyConsumer, ValkeyPublisher
 
 from .batch import batched
 from .config import ObjectDetectorConfig
@@ -42,10 +41,17 @@ def run_stage():
 
     detector = Detector(CONFIG)
 
-    consume = RedisConsumer(CONFIG.redis.host, CONFIG.redis.port, 
-                            stream_keys=[f'{CONFIG.redis.input_stream_prefix}:{id}' for id in CONFIG.redis.stream_ids],
-                            block=int(CONFIG.max_batch_interval * 1000))
-    publish = RedisPublisher(CONFIG.redis.host, CONFIG.redis.port)
+    input_backpressure = CONFIG.redis.input_backpressure
+    output_backpressure = CONFIG.redis.output_backpressure
+
+    consume = ValkeyConsumer(CONFIG.redis.host, CONFIG.redis.port,
+                             stream_keys=[f'{CONFIG.redis.input_stream_prefix}:{id}' for id in CONFIG.redis.stream_ids],
+                             block=int(CONFIG.max_batch_interval * 1000),
+                             enable_backpressure=input_backpressure.enabled)
+    publish = ValkeyPublisher(CONFIG.redis.host, CONFIG.redis.port,
+                              enable_backpressure=output_backpressure.enabled,
+                              backpressure_threshold=output_backpressure.threshold,
+                              fail_open_timeout=output_backpressure.fail_open_timeout)
     
     with consume, publish:
         for batch in batched(consume(), CONFIG.max_batch_size, CONFIG.max_batch_interval):
