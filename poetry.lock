@@ -2480,7 +2480,7 @@ subdirectory = "python/visionapi"
 
 [[package]]
 name = "visionlib"
-version = "1.0.1"
+version = "1.1.0"
 description = ""
 optional = false
 python-versions = "^3.10"
@@ -2501,11 +2501,11 @@ valkey = ">=6.0.0"
 [package.source]
 type = "git"
 url = "https://github.com/starwit/vision-lib.git"
-reference = "feature/AB#2319-implement-backpressure"
-resolved_reference = "2c01e501a679d38cc43965ab329d22638ef2df4c"
+reference = "1.1.0"
+resolved_reference = "a8b14d7f331caddecc334c435e943ab3f28d9a8f"
 subdirectory = "python"
 
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "d27cd8ecc81d133b1c0dc2b5a6cefbb40a08eac8a8e7c7a0fde2be04356929e2"
+content-hash = "80cef9d00d5eef4453fd7a068f9c36e682d06294f02566215fb0300f7101b2c1"
