@@ -28,10 +28,13 @@ jobs:
       uses: snok/install-poetry@v1
       with:
         version: '2.2.1'
-        plugins: poetry-plugin-export
 
     - name: Export requirements
       run: |
+        # @latest is required: on self-hosted runners the poetry config dir persists
+        # and may already declare the plugin, which makes a plain `self add` a no-op
+        # even though the freshly created poetry venv does not contain it.
+        poetry self add poetry-plugin-export@latest
         poetry export -o requirements.txt --without-hashes
       
     - name: Login to Docker Hub
